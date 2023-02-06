@@ -1,13 +1,13 @@
-package com.example.wallemicroservice;
+package com.example.walletmicrosevice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WalleMicroserviceApplication {
+public class WalletMicroseviceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WalleMicroserviceApplication.class, args);
+        SpringApplication.run(WalletMicroseviceApplication.class, args);
     }
 
 }

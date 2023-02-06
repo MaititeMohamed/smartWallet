@@ -1,7 +1,8 @@
-package com.example.wallemicroservice.entity;
+package com.example.walletmicroservice.entity;
 
+import com.example.walletmicroservice.util.Message;
 import jakarta.persistence.*;
-import org.aspectj.bridge.Message;
+
 
 @Entity
 public class Wallet {
