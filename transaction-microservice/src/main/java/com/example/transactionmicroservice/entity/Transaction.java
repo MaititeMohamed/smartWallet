@@ -1,12 +1,13 @@
 package com.example.transactionmicroservice.entity;
 
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
+import com.example.transactionmicroservice.util.Message;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
@@ -25,7 +26,13 @@ public class Transaction {
     private Float balance;
     private Float toBalance; //withdraw or deposit
     private String description;
-    private  Float finalBalance;
+    private  Float finalBalance;//just for test
+    @Transient
+    private Message message;
+
+    public Message getMessage() {
+        return message;
+    }
 
 
 }
