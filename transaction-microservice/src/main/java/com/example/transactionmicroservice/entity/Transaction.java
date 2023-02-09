@@ -24,9 +24,9 @@ public class Transaction {
     private String referenceWallet;
     private LocalDate transactionDate;
     private Float balance;
-    private Float toBalance; //withdraw or deposit
+    private Float Amount; // withdraw or deposit
     private String description;
-    private  Float finalBalance;//just for test
+    private  Float finalBalance;// just for test
     @Transient
     private Message message;
 

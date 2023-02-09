@@ -1,4 +1,6 @@
 package com.example.transactionmicroservice.service;
+import com.example.transactionmicroservice.dto.DtoConvert;
+import com.example.transactionmicroservice.dto.TransactionDto;
 import com.example.transactionmicroservice.entity.Transaction;
 import com.example.transactionmicroservice.repository.TransactionRepository;
 import com.example.transactionmicroservice.util.Message;
@@ -21,23 +23,23 @@ public class TransactionService {
     public float operation(Transaction transaction){
         String typeOfOperation = convertCase(transaction.getTransactionType());
         float balance = transaction.getBalance();
-        float toBalance = transaction.getToBalance();
+        float amount = transaction.getAmount();
 
         if ("withdraw".equals(typeOfOperation)) {
-            if(toBalance>balance ||toBalance==0){
+            if(amount>balance ||amount==0){
                 return balance;
             }
             else {
-                balance = balance - toBalance;
+                balance = balance - amount;
                 return balance;
             }
         }
 
         if ("deposit".equals(typeOfOperation)) {
-            if(toBalance==0){
+            if(amount==0){
                 return balance;
             }else {
-                balance = balance + toBalance;
+                balance = balance + amount;
                 return balance;
             }
 
@@ -47,10 +49,11 @@ public class TransactionService {
     }
 
 
-    public Transaction createTransaction(Transaction transaction){
+    public Transaction createTransaction(TransactionDto transactionDto){
         Message message =new Message();
+        Transaction transaction = DtoConvert.transactionDtoToEntity(transactionDto);
         if(transaction.getBalance()==operation(transaction)){
-            if (transaction.getToBalance()==0){
+            if (transaction.getAmount()==0){
                 message.setState("error");
                 message.setMessage("your input must be greater than 0$ ! ");
                 transaction.setMessage(message);
