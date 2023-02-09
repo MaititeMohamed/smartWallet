@@ -2,13 +2,15 @@ package com.example.usermicroservice.service;
 
 import com.example.usermicroservice.dto.DtoConvart;
 import com.example.usermicroservice.dto.UserDto;
+import com.example.usermicroservice.dto.WalletDto;
 import com.example.usermicroservice.entity.User;
 import com.example.usermicroservice.repository.UserRepository;
 import com.example.usermicroservice.util.Message;
-import org.modelmapper.ModelMapper;
+import com.example.usermicroservice.util.Proxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -17,11 +19,18 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    Proxy proxy;
 
+
+    public List<User> getAll(){
+        return userRepository.findAll();
+    }
 
     public Optional<User> getUserByEmail(String email){
         return  userRepository.findUserByEmail(email);
     }
+
 
     public  Optional<User> getUserByCin(String cin){
         return userRepository.findByCin(cin);
@@ -56,6 +65,9 @@ public class UserService {
         message.setState("Success");
         message.setMessage("User has ben created");
         user.setMessage(message);
+         proxy.generateWallet(WalletDto.builder()
+                         .ownerCin(user.getCin())
+                 .build());
         return  user;
     }
 
