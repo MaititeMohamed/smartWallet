@@ -1,9 +1,11 @@
 package com.example.transactionmicroservice.service;
 import com.example.transactionmicroservice.dto.DtoConvert;
 import com.example.transactionmicroservice.dto.TransactionDto;
+import com.example.transactionmicroservice.dto.WalletDto;
 import com.example.transactionmicroservice.entity.Transaction;
 import com.example.transactionmicroservice.repository.TransactionRepository;
 import com.example.transactionmicroservice.util.Message;
+import com.example.transactionmicroservice.util.Proxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ public class TransactionService {
     @Autowired
     TransactionRepository transactionRepository;
 
+    @Autowired
+    Proxy proxy;
+
 
     public String convertCase(String TransactionType) {
         if (TransactionType.equals(TransactionType.toUpperCase())) {
@@ -19,14 +24,20 @@ public class TransactionService {
         }
           return  TransactionType;
     }
+   public float getBalance(String referenceWallet){
+       WalletDto walletDto=  proxy.getWalletByReferenceWallet(referenceWallet);
+    return    walletDto.getBalance();
+   }
 
     public float operation(Transaction transaction){
+    float userBalance = getBalance(transaction.getReferenceWallet());
+
         String typeOfOperation = convertCase(transaction.getTransactionType());
-        float balance = transaction.getBalance();
+        float balance = userBalance;
         float amount = transaction.getAmount();
 
         if ("withdraw".equals(typeOfOperation)) {
-            if(amount>balance ||amount==0){
+            if(amount>balance ||amount==0 ||amount<0){
                 return balance;
             }
             else {
@@ -36,7 +47,7 @@ public class TransactionService {
         }
 
         if ("deposit".equals(typeOfOperation)) {
-            if(amount==0){
+            if(amount==0 ||amount<0){
                 return balance;
             }else {
                 balance = balance + amount;
@@ -52,8 +63,9 @@ public class TransactionService {
     public Transaction createTransaction(TransactionDto transactionDto){
         Message message =new Message();
         Transaction transaction = DtoConvert.transactionDtoToEntity(transactionDto);
-        if(transaction.getBalance()==operation(transaction)){
-            if (transaction.getAmount()==0){
+
+        if(getBalance(transaction.getReferenceWallet())==operation(transaction)){
+            if (transaction.getAmount()==0 || transaction.getAmount()<0){
                 message.setState("error");
                 message.setMessage("your input must be greater than 0$ ! ");
                 transaction.setMessage(message);
@@ -68,7 +80,12 @@ public class TransactionService {
             message.setState("success");
             message.setMessage("your transaction has ben based");
             transaction.setMessage(message);
-            return    transactionRepository.save(transaction);
+             proxy.updateWallet(WalletDto.builder()
+                             .referenceWallet(transaction.getReferenceWallet())
+                             .balance(transaction.getFinalBalance())
+                     .build());
+             transactionRepository.save(transaction);
+             return  transaction;
 
         }
     }

@@ -1,6 +1,6 @@
 package com.example.usermicroservice.service;
 
-import com.example.usermicroservice.dto.DtoConvart;
+import com.example.usermicroservice.dto.DtoConvert;
 import com.example.usermicroservice.dto.UserDto;
 import com.example.usermicroservice.dto.WalletDto;
 import com.example.usermicroservice.entity.User;
@@ -42,7 +42,7 @@ public class UserService {
     public User  registre(UserDto userDto){
 
         Message message =new Message();
-        User user = DtoConvart.UserDtoToEntity(userDto);
+        User user = DtoConvert.UserDtoToEntity(userDto);
         Optional<User> userByEmailAndCin=checkIfUserExists(user);
         if(user.getEmail()==null || user.getEmail()=="" || user.getFirstName()==null || user.getFirstName()==""
          ||user.getLastName()==null ||user.getLastName()=="" ||user.getCin()==null ||user.getCin()==""

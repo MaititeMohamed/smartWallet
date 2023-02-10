@@ -11,4 +11,5 @@ public interface WalletRepository extends JpaRepository<Wallet,Long> {
     Optional<Wallet> findWalletByReferenceWallet(String referenceWallet);
 
     Optional<Wallet> findWalletByOwnerCin(String ownerCin);
+
 }

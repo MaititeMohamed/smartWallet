@@ -2,6 +2,7 @@ package com.example.walletmicroservice.controller;
 
 import com.example.walletmicroservice.dto.WalletDto;
 import com.example.walletmicroservice.entity.Wallet;
+import com.example.walletmicroservice.repository.WalletRepository;
 import com.example.walletmicroservice.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,15 @@ public class WalletController {
 
      @Autowired
      WalletService walletService;
+    @Autowired
+    private WalletRepository walletRepository;
+
+
+    @GetMapping(path = "/getWalletByReferenceWallet/{referenceWallet}")
+    public  Optional<Wallet> getWalletByReferenceWallet(@PathVariable("referenceWallet") String referenceWallet){
+        return walletService.findWalletByReference(referenceWallet);
+    }
+
 
     @PostMapping("/generateWallet")
     public Wallet generateWallet(@RequestBody WalletDto walletDto){

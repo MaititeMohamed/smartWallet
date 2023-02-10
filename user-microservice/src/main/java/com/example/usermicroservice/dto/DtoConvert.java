@@ -3,7 +3,7 @@ package com.example.usermicroservice.dto;
 import com.example.usermicroservice.entity.User;
 import org.modelmapper.ModelMapper;
 
-public class DtoConvart {
+public class DtoConvert {
     public static User UserDtoToEntity(UserDto dto){
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(dto,User.class);
