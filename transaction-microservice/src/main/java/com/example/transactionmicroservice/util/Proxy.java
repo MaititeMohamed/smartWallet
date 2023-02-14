@@ -1,6 +1,4 @@
 package com.example.transactionmicroservice.util;
-
-
 import com.example.transactionmicroservice.dto.WalletDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,18 +6,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.Optional;
-
-@FeignClient(value = "wallet",url = "http://localhost:8082/wallet/")
+@FeignClient(name = "wallet-microservice")
 public interface Proxy {
 
 
-    @GetMapping(path = "/getWalletByOwnerCin/{ownerCin}")
+    @GetMapping(path = "/wallet/wallet/getWalletByOwnerCin/{ownerCin}")
     WalletDto displayWalletByOwnerCin(@PathVariable("ownerCin")String ownerCin);
 
-    @GetMapping(path = "/getWalletByReferenceWallet/{referenceWallet}")
+    @GetMapping(path = "/wallet/wallet/getWalletByReferenceWallet/{referenceWallet}")
     WalletDto getWalletByReferenceWallet(@PathVariable("referenceWallet") String referenceWallet);
 
-    @PutMapping(path = "/updateWallet")
+    @PutMapping(path = "/wallet/wallet/updateWallet")
     WalletDto updateWallet(@RequestBody WalletDto walletDto);
 }

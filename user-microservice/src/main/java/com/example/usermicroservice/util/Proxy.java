@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-@FeignClient(value = "wallet",url = "http://localhost:8082/wallet/")
+@FeignClient(name = "wallet-microservice")
 public interface Proxy {
 
-    @GetMapping(path = "/getWalletByOwnerCin/{ownerCin}")
+    @GetMapping(path = "/wallet/wallet/getWalletByOwnerCin/{ownerCin}")
     WalletDto displayWalletByOwnerCin(@PathVariable("ownerCin") String ownerCin);
 
-    @PostMapping("/generateWallet")
+    @PostMapping("/wallet/wallet/generateWallet")
     WalletDto generateWallet(@RequestBody WalletDto walletDto);
 }
