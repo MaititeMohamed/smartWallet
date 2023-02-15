@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="transaction-microservice:war">
+    <output-path>$PROJECT_DIR$/transaction-microservice/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>transaction-microservice</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="transaction-microservice-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="transaction-microservice:war exploded" />
+    </root>
+  </artifact>
+</component>

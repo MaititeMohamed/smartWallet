@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="gateway-microservice:war">
+    <output-path>$PROJECT_DIR$/gateway-microservice/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>gateway-microservice</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="gateway-microservice-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="gateway-microservice:war exploded" />
+    </root>
+  </artifact>
+</component>

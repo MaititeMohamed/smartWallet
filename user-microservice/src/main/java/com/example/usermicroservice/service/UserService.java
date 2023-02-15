@@ -39,7 +39,7 @@ public class UserService {
     public Optional<User> checkIfUserExists(User user){
        return userRepository.findByCinOrEmail(user.getCin(),user.getEmail());
     }
-    public User  registre(UserDto userDto){
+    public User  register(UserDto userDto){
 
         Message message =new Message();
         User user = DtoConvert.UserDtoToEntity(userDto);

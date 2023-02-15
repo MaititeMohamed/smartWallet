@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/gateway-microservice/gateway-microservice.iml" filepath="$PROJECT_DIR$/gateway-microservice/gateway-microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/server-registry/server-registry.iml" filepath="$PROJECT_DIR$/server-registry/server-registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/smartWallet.iml" filepath="$PROJECT_DIR$/.idea/smartWallet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/transaction-microservice/transaction-microservice.iml" filepath="$PROJECT_DIR$/transaction-microservice/transaction-microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/user-microservice/user-microservice.iml" filepath="$PROJECT_DIR$/user-microservice/user-microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wallet-microservice/wallet-microsevice.iml" filepath="$PROJECT_DIR$/wallet-microservice/wallet-microsevice.iml" />
+    </modules>
+  </component>
+</project>

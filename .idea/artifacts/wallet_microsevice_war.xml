@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="wallet-microsevice:war">
+    <output-path>$PROJECT_DIR$/wallet-microservice/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>wallet-microsevice</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="wallet-microsevice-0.0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="wallet-microsevice:war exploded" />
+    </root>
+  </artifact>
+</component>
